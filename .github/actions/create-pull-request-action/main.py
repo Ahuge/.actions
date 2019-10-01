@@ -23,7 +23,7 @@ def get_repo(github_instance, repository_name):
 
 
 def main(head, base):
-    e_token = os.environ.get("GITHUB_REPOSITORY")
+    e_token = os.environ.get("GITHUB_TOKEN")
     e_repository = os.environ.get("GITHUB_REPOSITORY")
 
     g = Github(e_token)
