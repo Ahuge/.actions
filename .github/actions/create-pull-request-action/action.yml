@@ -1,0 +1,22 @@
+name: 'Create Pull Request'
+description: "Create a Pull request"
+inputs:
+    head: 
+        description: "The head branch"
+        required: true
+    base:
+        description: "The base branch"
+        required: false
+        default: "master"
+outputs:
+    pull-request-id:
+        description: "The ID of the pull request."
+    created:
+        description: "Boolean True if we created a new pull-request"
+runs:
+    using: 'docker'
+    image: 'Dockerfile'
+    args:
+      - ${{ inputs.head }}
+      - ${{ inputs.base }}
+

@@ -1,0 +1,26 @@
+on: [push]
+
+jobs: 
+  test_pull_request_job: 
+    name: "A test for my pull-request-action"
+    runs-on: ubuntu-latest
+    steps: 
+      - 
+        name: Checkout
+        uses: actions/checkout@v1
+      - 
+        id: action
+        name: "Do the thing"
+        env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ./.github/actions/create-pull-request-action
+        with: 
+          base: release
+          head: dev
+      - 
+        name: "Read PR ID"
+        run: "echo \"The Pull Request ID was: ${{ steps.action.outputs.pull-request-id }}\""
+      - 
+        name: "Read Created"
+        run: "if [ \"${{ steps.action.outputs.created }}\" == \"True\" ]; then echo \"We created the PR!\"; else echo \"We did not create the PR :(\"; fi"
+
