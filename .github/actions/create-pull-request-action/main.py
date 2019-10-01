@@ -4,6 +4,7 @@ import os
 from github import Github
 
 TITLE = "Automatic Pull Request from {head} into {base}"
+BODY = "Automatic Pull Request Body"
 PULL_REQUEST_ID_KEY = "pull-request-id"
 CREATED_KEY = "created"
 
@@ -46,7 +47,12 @@ def main(head, base):
 
     if pull_request is None:
         created = True
-        pull_request = repo.create_pull(title=TITLE.format(head=head, base=base))
+        pull_request = repo.create_pull(
+            title=TITLE.format(head=head, base=base),
+            body=BODY,
+            base=base,
+            head=head,
+        )
 
     return pull_request.id, created
 
