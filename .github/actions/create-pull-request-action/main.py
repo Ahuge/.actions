@@ -48,6 +48,12 @@ def main(head, base):
     if pull_request is None:
         created = True
         print("Creating pull-request {base} <--- {head}".format(base=base, head=head))
+        print(
+            "title=%s" % TITLE.format(head=head, base=base),
+            "body=%s" % BODY,
+            "base=%s" % base,
+            "head=%s" % head,
+        )
         pull_request = repo.create_pull(
             title=TITLE.format(head=head, base=base),
             body=BODY,
