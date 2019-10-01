@@ -11,6 +11,8 @@ jobs:
       - 
         id: action
         name: "Do the thing"
+        env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: ./.github/actions/create-pull-request-action
         with: 
           base: release
