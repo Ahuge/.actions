@@ -6,6 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - 
+        name: Checkout
+        uses: actions/checkout@v1
+      - 
         id: action
         name: "Do the thing"
         uses: ./.github/actions/create-pull-request-action
