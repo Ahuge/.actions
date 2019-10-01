@@ -27,7 +27,7 @@ def main(head, base):
     e_repository = os.environ.get("GITHUB_REPOSITORY")
 
     g = Github(e_token)
-    repo = get_repo(g, e_repository)
+    repo = g.get_repo(e_repository)
     if not repo:
         message = "Could not load repository with name '{}'".format(e_repository)
         if not e_repository:
@@ -37,12 +37,12 @@ def main(head, base):
 
     pull_requests = repo.get_pulls(state="open", sort="create", base=base, head=head)
     created = False
-    if len(pull_requests) > 1:
-        pull_request = pull_requests.pop(0)
-    elif not pull_requests:
+    if pull_requests.totalCount > 1:
+        pull_request = pull_requests[0]
+    elif pull_requests.totalCount == 0:
         pull_request = None
     else:
-        pull_request = pull_requests
+        pull_request = pull_requests[0]
 
     if pull_request is None:
         created = True
